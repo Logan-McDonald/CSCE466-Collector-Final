@@ -1,0 +1,9 @@
+db.sqlite3
+/env
+/collector_backend/__pycache__
+/userCollections/__pycache__
+/messaging/__pycache__
+/users/__pycache__
+
+**/migrations/*.pyc
+**/migrations/__pycache__/
