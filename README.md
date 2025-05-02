@@ -29,3 +29,16 @@ Our final project for CSCE466. This is a website for collectors to connect and s
 6. Run the Development Server
     - Run the command: `python manage.py runserver`
     - Confirm the server runs with no issues!
+
+### *Dev Notes
+- When developing, enter the virtual environment
+    - `.\env\Scripts\Activate.ps1`
+
+- When you make changes to the database, you need to run migrations before running the server
+    - Run the command: `python manage.py makemigrations`
+    - Then, run the command: `python manage.py migrate`
+
+- To check the database, you can use the Django Admin Interface
+    - This is the most user-friendly way to access and manage the database.
+    - Run the server: `python manage.py runserver`
+    - Visit: http://localhost:8000/admin
