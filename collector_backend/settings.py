@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'users',
     'userCollections',
     'messaging',
+    'channels',
+    'account',
     'django.contrib.sites',
 ]
 
@@ -74,6 +76,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'collector_backend.wsgi.application'
 
+ASGI_APPLICATION = "collector_backend.asgi.application"
+
+LOGIN_URL = '/account/login/'
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/account/login/'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -126,3 +135,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Channel layer config (in-memory for dev)
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}

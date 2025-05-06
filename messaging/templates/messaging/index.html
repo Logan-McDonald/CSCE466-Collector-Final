@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Messages</title>
+  <link rel="stylesheet" href="{% static 'messaging/style.css' %}">
+  <style>
+    /* Reset and base styles */
+    body { margin: 0; font-family: sans-serif; background: #333; color: #eee; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Nav bar */
+    .nav-bar { background: #222; padding: 10px; text-align: center; border-bottom: 1px solid #444; }
+    .nav-item { margin: 0 15px; color: #ccc; font-weight: bold; }
+    .nav-item.active { color: #fff; text-decoration: underline; }
+
+    /* Chat layout */
+    .chat-container { display: flex; height: calc(100vh - 42px); }
+
+    /* Sidebar */
+    .sidebar { width: 220px; background: #444; padding: 10px; border-right: 2px solid #222; display: flex; flex-direction: column; }
+    .new-chat { margin-bottom: 15px; }
+    .new-chat input { width: calc(100% - 20px); margin: 5px 0; padding: 8px; border-radius: 6px; border: none; }
+    .new-chat button { width: 100%; padding: 8px; border: none; border-radius: 6px; background: #666; color: #fff; font-weight: bold; cursor: pointer; }
+    .contact { padding: 10px 15px; margin: 5px 0; background: #555; border-radius: 8px; transition: background 0.2s; }
+    .contact:hover { background: #666; }
+    .contact.active { background: #777; }
+
+    /* Main panel */
+    .main-panel { flex: 1; display: flex; flex-direction: column; }
+    .chat-header { background: #444; padding: 15px; font-size: 1.5em; text-align: center; border-bottom: 2px solid #222; }
+    .messages-area { flex: 1; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; }
+    .message-bubble { max-width: 60%; margin: 8px 0; padding: 10px 15px; background: #555; border-radius: 12px; word-wrap: break-word; align-self: flex-start; }
+    .message-bubble.outgoing { background: #888; align-self: flex-end; }
+
+    /* Input area */
+    .input-area { display: flex; padding: 10px; background: #444; border-top: 2px solid #222; }
+    .input-area input { flex: 1; padding: 10px; border: none; border-radius: 8px; margin-right: 10px; }
+    .input-area button { padding: 10px 20px; border: none; border-radius: 8px; background: #666; color: #fff; font-weight: bold; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <nav class="nav-bar">
+    <a href="#" class="nav-item">Home</a>
+    <span class="nav-separator">|</span>
+    <a href="#" class="nav-item active">Messages</a>
+    <span class="nav-separator">|</span>
+    <a href="#" class="nav-item">Profile</a>
+  </nav>
+  <div class="chat-container">
+    <aside class="sidebar">
+      <!-- New Chat Form -->
+      <div class="new-chat">
+        <form method="get" action="{% url 'messages' %}">
+          <input type="text" name="handle" placeholder="User handle…" required>
+          <input type="text" name="first_message" placeholder="First message…">
+          <button type="submit">Start Chat</button>
+        </form>
+      </div>
+      {% for c in contacts %}
+        <a href="{% url 'chat' c.handle %}" class="contact {% if c.handle == room_handle %}active{% endif %}">{{ c.handle|capfirst }}</a>
+      {% endfor %}
+    </aside>
+    <main class="main-panel">
+      <header class="chat-header">{{ room_handle|capfirst }}</header>
+      <section class="messages-area">
+        {% for m in messages %}
+          <div class="message-bubble {% if m.sender == user %}outgoing{% else %}incoming{% endif %}">
+            <p>{{ m.content }}</p>
+          </div>
+        {% endfor %}
+      </section>
+      <form method="post" class="input-area">
+        {% csrf_token %}
+        <input type="text" name="content" placeholder="User types messages here…">
+        <button type="submit">Send</button>
+      </form>
+    </main>
+  </div>
+</body>
+</html>
