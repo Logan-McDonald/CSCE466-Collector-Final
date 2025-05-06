@@ -28,11 +28,11 @@
         }
 
         .nav-item {
-            margin: 0 10px; /* Ensure uniform horizontal spacing */
+            margin: 0 10px;
             color: #ccc;
             font-weight: bold;
             font-size: 16px;
-            display: inline-block; /* Ensures they stay in one line */
+            display: inline-block;
         }
 
         .nav-item.active {
@@ -42,7 +42,7 @@
 
         .nav-separator {
             color: #ccc;
-            margin: 0 5px; /* Ensure the separator matches the spacing */
+            margin: 0 5px;
         }
 
         .nav-item a {
@@ -84,7 +84,7 @@
         }
 
         .remove-collection-btn {
-            background-color: #8b0000; /* Dark greyish red */
+            background-color: #f76363;
             color: white;
             border: none;
             padding: 5px 10px;
@@ -96,37 +96,13 @@
         }
 
         .remove-collection-btn:hover {
-            background-color: #a40000; /* Slightly lighter greyish red on hover */
+            background-color: #f76363;
         }
 
-        .item {
-            display: flex;
-            background-color: #666;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        .item img {
-            width: 50px;
-            height: 50px;
-            background-color: #777;
-            margin-right: 20px;
-        }
-
-        .item-name {
-            font-weight: bold;
-            margin-right: 20px;
-        }
-
-        .item-description {
-            color: #ccc;
-        }
-
-        /* Add item and collection buttons - Greyscale */
+        /* Add item and collection buttons */
         .add-collection-btn,
         .add-item-btn {
-            background-color: #555; /* Dark grey background */
+            background-color: #555;
             color: white;
             padding: 8px 12px;
             border-radius: 6px;
@@ -139,7 +115,7 @@
 
         .add-collection-btn:hover,
         .add-item-btn:hover {
-            background-color: #666; /* Slightly lighter grey on hover */
+            background-color: #666;
         }
 
         /* Form wrapper */
@@ -182,33 +158,73 @@
             background-color: #0055aa;
         }
 
-        /* Remove item button - Greyscale-ish red */
+        /* Item card styling */
+        .item {
+            display: flex;
+            align-items: center;
+            background-color: #666;
+            margin-bottom: 12px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            transition: background-color 0.2s ease;
+            gap: 20px;
+        }
+
+        .item:hover {
+            background-color: #777;
+        }
+
+        .item img,
+        .item > div:first-child {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            background-color: #777;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex-grow: 1;
+        }
+
+        .item-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 6px;
+        }
+
+        .item-description {
+            color: #ccc;
+            font-size: 0.95em;
+        }
+
         .remove-item-btn {
-            background-color: #8b0000; /* Darker greyish red */
+            background-color: #f76363;
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 6px 12px;
             cursor: pointer;
-            margin-left: auto;
             border-radius: 6px;
+            margin-left: 20px;
         }
 
         .remove-item-btn:hover {
-            background-color: #a40000; /* Slightly lighter greyish red on hover */
+            background-color: #f76363;
         }
     </style>
 </head>
 <body>
     <!-- Nav bar -->
     <nav class="nav-bar">
-        <a href="#" class="nav-item">Home</a>
+        <a href="#" class="nav-item active">Home</a>
         <span class="nav-separator">|</span>
         <a href="{% url 'messages' %}" class="nav-item active">Messages</a>
         <span class="nav-separator">|</span>
         <a href="{% url 'profile' %}" class="nav-item active">Collections</a>
         <span class="nav-separator">|</span>
         <a href="{% url 'account' %}" class="nav-item active">Account</a>
-      </nav>
+    </nav>
 
     <div class="collections-container">
         <h2>{{ request.user.username }}'s Collections</h2>
@@ -252,11 +268,12 @@
                             {% if item.image %}
                                 <img src="{{ item.image.url }}" alt="{{ item.name }}">
                             {% else %}
-                                <div style="width:50px;height:50px;background:#777;"></div>
+                                <div style="width:60px;height:60px;background:#777;border-radius:6px;"></div>
                             {% endif %}
-                            <div class="item-name">{{ item.name }}</div>
-                            <div class="item-description">{{ item.description }}</div>
-
+                            <div class="item-details">
+                                <div class="item-name">{{ item.name }}</div>
+                                <div class="item-description">{{ item.description }}</div>
+                            </div>
                             <form method="POST" style="display:inline;">
                                 {% csrf_token %}
                                 <input type="hidden" name="item_id" value="{{ item.id }}">
@@ -270,13 +287,11 @@
     </div>
 
     <script>
-        // Toggle the visibility of the expandable collection form
         function toggleExpandableForm() {
             const form = document.getElementById('expandable-form');
             form.classList.toggle('active');
         }
 
-        // Toggle the visibility of the expandable item form inside each collection
         function toggleExpandableItemForm(collectionId) {
             const form = document.getElementById('expandable-item-form-' + collectionId);
             form.classList.toggle('active');
