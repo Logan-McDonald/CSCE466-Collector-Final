@@ -42,12 +42,14 @@
 </head>
 <body>
   <nav class="nav-bar">
-    <a href="/" class="nav-item">Home</a>
+    <a href="#" class="nav-item">Home</a>
     <span class="nav-separator">|</span>
     <a href="{% url 'messages' %}" class="nav-item active">Messages</a>
     <span class="nav-separator">|</span>
+    <a href="{% url 'profile' %}" class="nav-item active">Collections</a>
+    <span class="nav-separator">|</span>
     <a href="{% url 'account' %}" class="nav-item active">Account</a>
-  </nav>
+</nav>
   <div class="chat-container">
     <aside class="sidebar">
       <!-- New Chat Form -->
@@ -78,40 +80,41 @@
       </form>
     </main>
   </div>
-  <!-- <script>
+  <script>
     const roomKey = "{{ room_key }}";
     const myHandle = "{{ my_handle }}";
-  
+
+    console.log("Initializing chat socket for", roomKey);
     const chatSocket = new WebSocket(
       `ws://${window.location.host}/ws/chat/${roomKey}/`
     );
-  
-    chatSocket.onopen = () => {
-      console.log("WebSocket connected to", roomKey);
-    };
-  
+
+    chatSocket.onopen = () => console.log("WebSocket connected.");
+    chatSocket.onerror = e => console.error("WS error:", e);
+    chatSocket.onclose = e => console.warn("WS closed:", e);
+
     chatSocket.onmessage = function(e) {
+      console.log("WS received:", e.data);
       const data = JSON.parse(e.data);
-      const messageDiv = document.createElement("div");
-      messageDiv.classList.add("message-bubble");
-      if (data.sender === myHandle) {
-        messageDiv.classList.add("outgoing");
-      }
-      messageDiv.innerHTML = `<p>${data.message}</p>`;
-      document.querySelector('.messages-area').appendChild(messageDiv);
-      document.querySelector('.messages-area').scrollTop = document.querySelector('.messages-area').scrollHeight;
+      const bubble = document.createElement("div");
+      bubble.classList.add("message-bubble");
+      if (data.sender === myHandle) bubble.classList.add("outgoing");
+      bubble.innerHTML = `<p>${data.message}</p>`;
+      const area = document.querySelector('.messages-area');
+      area.appendChild(bubble);
+      area.scrollTop = area.scrollHeight;
     };
-  
+
     document.querySelector('.input-area').addEventListener('submit', function(e) {
       e.preventDefault();
-      const inputField = document.querySelector('input[name="content"]');
-      const message = inputField.value.trim();
-      if (!message) return;
-  
-      chatSocket.send(JSON.stringify({ 'message': message }));
-      inputField.value = '';
+      const input = this.querySelector('input[name="content"]');
+      const msg = input.value.trim();
+      if (!msg) return;
+      console.log("WS sending:", msg);
+      chatSocket.send(JSON.stringify({ message: msg }));
+      input.value = '';
     });
-  </script> -->
+  </script>
   
 </body>
 </html>

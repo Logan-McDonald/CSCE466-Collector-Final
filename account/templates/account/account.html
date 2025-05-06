@@ -4,22 +4,9 @@
     <title>Account Settings</title>
     <style>
         /* Tab bar styles */
-        nav.tab-bar {
-            background: #222;
-            padding: 10px;
-            text-align: center;
-        }
-        nav.tab-bar a {
-            margin: 0 15px;
-            color: #ccc;
-            text-decoration: none;
-            font-weight: normal;
-        }
-        nav.tab-bar a.active {
-            color: white;
-            font-weight: bold;
-            text-decoration: underline;
-        }
+        .nav-bar { background: #222; padding: 10px; text-align: center; border-bottom: 1px solid #444; }
+        .nav-item { margin: 0 15px; color: #ccc; font-weight: bold; }
+        .nav-item.active { color: #fff; text-decoration: underline; }
 
         /* Page layout */
         body {
@@ -80,17 +67,14 @@
     </style>
 </head>
 <body>
-    <nav class="tab-bar" style="background:#222; padding:10px; text-align:center;">
-        <a href="{% url 'account' %}"
-           class="{% if request.resolver_match.url_name == 'account' %}active{% endif %}"
-           style="margin:0 15px; color:#ccc; text-decoration:none;">
-          Account
-        </a>
-        <a href="{% url 'messages' %}"
-           class="{% if request.resolver_match.url_name == 'messages' %}active{% endif %}"
-           style="margin:0 15px; color:#ccc; text-decoration:none;">
-          Messages
-        </a>
+    <nav class="nav-bar">
+        <a href="#" class="nav-item">Home</a>
+        <span class="nav-separator">|</span>
+        <a href="{% url 'messages' %}" class="nav-item active">Messages</a>
+        <span class="nav-separator">|</span>
+        <a href="{% url 'profile' %}" class="nav-item active">Collections</a>
+        <span class="nav-separator">|</span>
+        <a href="{% url 'account' %}" class="nav-item active">Account</a>
     </nav>
 
     <div class="wrapper">

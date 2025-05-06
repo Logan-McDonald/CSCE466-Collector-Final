@@ -44,7 +44,9 @@
   <nav class="nav-bar">
     <a href="#" class="nav-item">Home</a>
     <span class="nav-separator">|</span>
-    <a href="#" class="nav-item active">Messages</a>
+    <a href="{% url 'messages' %}" class="nav-item active">Messages</a>
+    <span class="nav-separator">|</span>
+    <a href="{% url 'profile' %}" class="nav-item active">Collections</a>
     <span class="nav-separator">|</span>
     <a href="{% url 'account' %}" class="nav-item active">Account</a>
   </nav>
