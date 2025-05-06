@@ -27,6 +27,9 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     # Account
     path('', account_views.account, name='account'),
+    
+    # Sign up
+    path('account/signup/', account_views.signup, name='signup'),
 
     # Log in
     path('account/login/', auth_views.LoginView.as_view(template_name='account/login.html'), name='login'),
