@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from messaging import views as messaging_views
 from account import views as account_views
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
@@ -33,7 +34,7 @@ urlpatterns = [
 
     # Log in
     path('account/login/', auth_views.LoginView.as_view(template_name='account/login.html'), name='login'),
-    path('account/logout/', account_views.login_redirect, name='logout'),
+    path('account/logout/', LogoutView.as_view(), name='logout'),
 
     # Messaging
     path('messages/', messaging_views.index, name='messages'),
