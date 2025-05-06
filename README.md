@@ -8,6 +8,7 @@ Our final project for CSCE466. This is a website for collectors to connect and s
 2. Create and Activate Virtual Environment
     - Run the command: `python -m venv env` and then an env folder should populate
     - Run this to enter the env (we do all development in here): `.\env\Scripts\Activate.ps1`
+        - If in Powershell, you may have to run the command `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` first.
 
 3. Install Django
     - Run the command: `pip install django`
