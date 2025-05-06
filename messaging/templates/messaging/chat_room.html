@@ -42,12 +42,14 @@
 </head>
 <body>
   <nav class="nav-bar">
-    <a href="/" class="nav-item">Home</a>
+    <a href="#" class="nav-item">Home</a>
     <span class="nav-separator">|</span>
     <a href="{% url 'messages' %}" class="nav-item active">Messages</a>
     <span class="nav-separator">|</span>
+    <a href="{% url 'profile' %}" class="nav-item active">Collections</a>
+    <span class="nav-separator">|</span>
     <a href="{% url 'account' %}" class="nav-item active">Account</a>
-  </nav>
+</nav>
   <div class="chat-container">
     <aside class="sidebar">
       <!-- New Chat Form -->
