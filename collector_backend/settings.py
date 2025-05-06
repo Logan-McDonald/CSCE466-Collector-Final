@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +42,6 @@ INSTALLED_APPS = [
     'users',
     'userCollections',
     'messaging',
-    'channels',
     'account',
     'django.contrib.sites',
 ]
@@ -74,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'collector_backend.wsgi.application'
+# WSGI_APPLICATION = 'collector_backend.wsgi.application'
 
 ASGI_APPLICATION = "collector_backend.asgi.application"
 
