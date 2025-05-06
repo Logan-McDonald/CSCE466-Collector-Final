@@ -201,12 +201,14 @@
 <body>
     <!-- Nav bar -->
     <nav class="nav-bar">
-        <div class="nav-item"><a href="/">Home</a></div>
+        <a href="#" class="nav-item">Home</a>
         <span class="nav-separator">|</span>
-        <div class="nav-item active"><a href="/messages/">Messages</a></div>
+        <a href="{% url 'messages' %}" class="nav-item active">Messages</a>
         <span class="nav-separator">|</span>
-        <div class="nav-item active"><a href="/profile/">Profile</a></div>
-    </nav>
+        <a href="{% url 'profile' %}" class="nav-item active">Profile</a>
+        <span class="nav-separator">|</span>
+        <a href="{% url 'account' %}" class="nav-item active">Account</a>
+      </nav>
 
     <div class="collections-container">
         <h2>{{ request.user.username }}'s Collections</h2>
