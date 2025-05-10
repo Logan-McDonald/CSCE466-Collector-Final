@@ -26,7 +26,7 @@ from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
-    # Account
+    # Initial redirect
     path('', account_views.account, name='account'),
     
     # Sign up
@@ -44,8 +44,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', include('userCollections.urls')),
-    # path('messages/', include('messaging.urls'))     # Uncomment if you want messaging URLs
-    # path('', include('home.urls'))                   # Uncomment for a home route
 ]
 
 # Serve media files during development

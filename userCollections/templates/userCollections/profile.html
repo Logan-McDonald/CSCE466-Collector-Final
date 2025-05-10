@@ -6,7 +6,6 @@
     <title>User Collections</title>
     <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
     <style>
-        /* Reset and base styles */
         body {
             margin: 0;
             font-family: sans-serif;
@@ -19,7 +18,6 @@
             color: inherit;
         }
 
-        /* Nav bar */
         .nav-bar {
             background: #222;
             padding: 10px;
@@ -55,7 +53,6 @@
             text-decoration: underline;
         }
 
-        /* Collections container */
         .collections-container {
             margin: 30px;
             padding: 20px;
@@ -68,7 +65,6 @@
             font-size: 1.8em;
         }
 
-        /* Collection styles */
         .collection {
             margin-bottom: 20px;
             padding: 20px;
@@ -99,7 +95,6 @@
             background-color: #f76363;
         }
 
-        /* Add item and collection buttons */
         .add-collection-btn,
         .add-item-btn {
             background-color: #555;
@@ -118,7 +113,6 @@
             background-color: #666;
         }
 
-        /* Form wrapper */
         .expandable-form-wrapper {
             display: none;
             margin-top: 20px;
@@ -158,7 +152,6 @@
             background-color: #0055aa;
         }
 
-        /* Item card styling */
         .item {
             display: flex;
             align-items: center;
@@ -215,7 +208,6 @@
     </style>
 </head>
 <body>
-    <!-- Nav bar -->
     <nav class="nav-bar">
         <a href="#" class="nav-item active">Home</a>
         <span class="nav-separator">|</span>
@@ -231,7 +223,6 @@
 
         <button class="add-collection-btn" onclick="toggleExpandableForm()">Add New Collection</button>
 
-        <!-- Expandable Form for Adding New Collection -->
         <div id="expandable-form" class="expandable-form-wrapper">
             <form method="POST">
                 {% csrf_token %}
@@ -252,7 +243,6 @@
 
                 <button class="add-item-btn" onclick="toggleExpandableItemForm('{{ collection.id }}')">Add Item</button>
 
-                <!-- Expandable Form for Adding Items to the Collection -->
                 <div id="expandable-item-form-{{ collection.id }}" class="expandable-form-wrapper">
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}

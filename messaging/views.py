@@ -9,7 +9,6 @@ User = get_user_model()
 
 @login_required
 def index(request):
-    # Handle “start new chat” form
     handle = request.GET.get('handle')
     first_message = request.GET.get('first_message')
     if handle:
@@ -22,7 +21,6 @@ def index(request):
             )
         return redirect('chat', handle=handle)
 
-    # Build sidebar contacts ordered by most recent message (sent or received)
     contacts = User.objects.filter(
         Q(sent_messages__receiver=request.user) |
         Q(received_messages__sender=request.user)
@@ -41,7 +39,6 @@ def index(request):
 def chat_room(request, handle):
     other = get_object_or_404(User, handle=handle)
 
-    # Handle new message POST
     if request.method == 'POST':
         content = request.POST.get('content', '').strip()
         if content:
@@ -52,7 +49,6 @@ def chat_room(request, handle):
             )
         return redirect('chat', handle=handle)
 
-    # Sidebar contacts logic
     contacts = User.objects.filter(
         Q(sent_messages__receiver=request.user) |
         Q(received_messages__sender=request.user)

@@ -28,7 +28,7 @@ class CustomUserModelTest(TestCase):
             User.objects.create_user(
                 username="user2",
                 password="pass2",
-                handle="uniquehandle",  # same handle, should fail
+                handle="uniquehandle",
                 bio="User 2"
             )
 
@@ -38,4 +38,4 @@ class CustomUserModelTest(TestCase):
             password="pass123",
             bio="Bio here."
         )
-        self.assertEqual(user.display_name, "")  # default is blank
+        self.assertEqual(user.display_name, "")
