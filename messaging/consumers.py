@@ -42,7 +42,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         if not content:
             return
 
-        # Add the message to the database
         other = await sync_to_async(User.objects.get)(handle=self.other_handle)
         await sync_to_async(Message.objects.create)(
             sender=self.scope['user'],
@@ -50,7 +49,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
             content=content
         )
 
-        # Send the message to the room group
         await self.channel_layer.group_send(
             self.room_group_name,
             {
@@ -61,7 +59,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
     async def chat_message(self, event):
-        # Receive message from room group and send it over websocket
         await self.send(text_data=json.dumps({
             'message': event['message'],
             'sender': event['sender'],
