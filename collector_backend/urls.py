@@ -44,8 +44,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', include('userCollections.urls')),
-    # path('messages/', include('messaging.urls'))     # Uncomment if you want messaging URLs
-    # path('', include('home.urls'))                   # Uncomment for a home route
+    # path('messages/', include('messaging.urls'))
+    # path('', include('home.urls'))
 ]
 
 # Serve media files during development
