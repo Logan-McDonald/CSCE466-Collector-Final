@@ -4,6 +4,8 @@ db.sqlite3
 /userCollections/__pycache__
 /messaging/__pycache__
 /users/__pycache__
+/account/__pycache__
+/media
 
 **/migrations/*.pyc
 **/migrations/__pycache__/

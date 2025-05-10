@@ -1,16 +1,21 @@
 # CSCE466-Collector-Final
 Our final project for CSCE466. This is a website for collectors to connect and share their personal collections.
 
-## Django Setup
+## Required dependencies
 
-1. Clone the repo
+- All that is need is the latest version of Python! We suggest to use a powershell terminal as that is what we used!
+
+## Compiling and Running our Application
+*Assuming Python is already installed, and your on Windows, follow these steps*
+
+1. Clone the repository from Github
 
 2. Create and Activate Virtual Environment
     - Run the command: `python -m venv env` and then an env folder should populate
     - Run this to enter the env (we do all development in here): `.\env\Scripts\Activate.ps1`
-        - If in Powershell, you may have to run the command `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` first.
+        - *If in Powershell, you may have to run the command `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` first.
 
-3. Install Django
+3. Now that your in the (env), Install Django
     - Run the command: `pip install django`
 
 4. Run Migrations
@@ -32,7 +37,7 @@ Our final project for CSCE466. This is a website for collectors to connect and s
     - Confirm the server runs with no issues!
 
 ### *Dev Notes
-- When developing, enter the virtual environment
+- When developing, ALWAYS enter the virtual environment
     - `.\env\Scripts\Activate.ps1`
 
 - When you make changes to the database, you need to run migrations before running the server
@@ -43,3 +48,10 @@ Our final project for CSCE466. This is a website for collectors to connect and s
     - This is the most user-friendly way to access and manage the database.
     - Run the server: `python manage.py runserver`
     - Visit: http://localhost:8000/admin
+
+
+## Known limitations/problems
+
+- As of now, we don't know of any problems with our app, as we were able to fix everything that we encountered. However, one limitation we can name is the fact we aren't implementing the home page since it is out of scope.
+
+
